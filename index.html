@@ -4,31 +4,26 @@
   <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.js"></script>
 
   <script>
-    AFRAME.registerComponent("markerhandler", {
+    AFRAME.registerComponent("clickable", {
       init: function () {
-        const clickable = document.querySelector("#clickable");
-        clickable.addEventListener("click", function (event) {
-          window.open("https://www.w3schools.com");
+        this.el.addEventListener("click", (e) => {
+          console.log("HELLO");
+          window.open("http://bbc.co.uk");
         });
       },
     });
   </script>
   <body style="margin: 0px; overflow: hidden">
-    <a-scene
-      embedded
-      vr-mode-ui="enabled: false"
-      cursor="fuse: false; rayOrigin: mouse"
-      arjs="sourceType: webcam; debugUIEnabled: false;"
-    >
+    <a-scene vr-mode-ui="enabled: false" cursor="rayOrigin: mouse">
       <a-assets>
         <img id="Sticker_01" src="images/Sticker_01.png" />
       </a-assets>
+
       <a-marker
-        markerhandler
         preset="custom"
         type="pattern"
         url="images/pattern-QR.patt"
-        emitevents="true"
+        clickable
       >
         <a-image
           rotation="-90 0 0"
@@ -36,7 +31,7 @@
           height="1"
           position="0 0 0"
           src="#Sticker_01"
-          id="clickable"
+          clickable
         ></a-image>
       </a-marker>
       <a-entity camera />
